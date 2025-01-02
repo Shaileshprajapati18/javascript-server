@@ -1,24 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
+// server.js
+const express = require('express');
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const port = process.env.PORT || 3000;
 
-const products = []; // Temporary in-memory database
-
-app.get("/products", (req, res) => {
-    res.json(products);
+// Root route
+app.get('/', (req, res) => {
+  res.json({ status: 'Server is running' });
 });
 
-app.post("/products", (req, res) => {
-    const product = req.body;
-    products.push(product);
-    res.status(201).json({ message: "Product added", product });
+// 'get_msg' route
+app.get('/get_msg', (req, res) => {
+  res.json({ message: 'Hello, from server' });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
